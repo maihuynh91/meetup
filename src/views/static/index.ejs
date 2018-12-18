@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <% include ./partials/head.ejs %>
+
+  </head>
+  <body>
+
+      <% include ./partials/navbar.ejs %>
+
+      <!-- Page Content -->
+      <main class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+          <h1 class="display-3">Welcome to meetup</h1>
+          <p class="lead">Explore and discover groups in your area that are all about the things you love.</p>
+          <a href="#" class="btn btn-primary btn-lg">Sign up</a>
+        </header>
+
+        <!-- Page Features -->
+        <section class="row text-center">
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Meetings</h4>
+            <p class="card-text">Meetup with people who love what you love, and keep the conversation going.
+
+                .</p>
+          </section>
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Comment</h4>
+            <p class="card-text">Your opinion counts! But you have to make yourself heard first!</p>
+          </section>
+
+          <section class="col-lg-4">
+            <h4 class="card-title">Stay Informed</h4>
+            <p class="card-text">Create the perfect Meetup for you. Meetup gets you members and makes it easy.</p>
+          </section>
+
+        </section>
+        <!-- /.row -->
+
+      </main>
+      <!-- /.container -->
+      <% include ./partials/baseScripts.ejs %>
+      
+    </body>
+</html>
