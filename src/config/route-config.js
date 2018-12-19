@@ -3,10 +3,12 @@ module.exports = {
       const staticRoutes = require("../routes/static");
       const meetingRoutes = require("../routes/meetings");
       const postRoutes = require("../routes/posts");
+      const userRoutes = require("../routes/users");
 
       app.use(staticRoutes);
       app.use(meetingRoutes);
       app.use(postRoutes);
-
+      app.use(userRoutes);
+      
     }
   }

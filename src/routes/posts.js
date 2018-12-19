@@ -2,12 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const postController = require("../controllers/postController");
+const validation = require("./validation");
+
 
 router.get("/meetings/:meetingId/posts/new", postController.new);
-router.post("/meetings/:meetingId/posts/create", postController.create);
+router.post("/meetings/:meetingId/posts/create", validation.validatePosts, postController.create);
 router.get("/meetings/:meetingId/posts/:id", postController.show);
 router.post("/meetings/:meetingId/posts/:id/destroy", postController.destroy);
 router.get("/meetings/:meetingId/posts/:id/edit", postController.edit);
-router.post("/meetings/:meetingId/posts/:id/update", postController.update);
+router.post("/meetings/:meetingId/posts/:id/update", validation.validatePosts, postController.update);
 
 module.exports = router;
