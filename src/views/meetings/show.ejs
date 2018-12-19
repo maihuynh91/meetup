@@ -9,12 +9,17 @@
     <main class="container">
       <h1><%= meeting.title %></h1>
       <a href="/meetings" class="btn btn-success">Back to Meetings</a>
-      <a href="/meetings/<%= meeting.id %>/posts/new" class="btn btn-success">New Post</a>
-      <a href="/meetings/<%= meeting.id %>/edit" class="btn btn-warning">Edit</a>
-      
-      <form style="display:initial" action="/meetings/<%= meeting.id %>/destroy" method="post">
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
+
+      <% if(currentUser) { %>
+        <a href="/meetings/<%= meeting.id %>/posts/new" class="btn btn-success">New Post</a>
+        <% if(currentUser.isAdmin()) { %>
+        <a href="/meetings/<%= meeting.id %>/edit" class="btn btn-warning">Edit</a>
+        
+        <form style="display:initial" action="/meetings/<%= meeting.id %>/destroy" method="post">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        <% } %>
+      <% } %>
 
       <p><%= meeting.description %></p>
 

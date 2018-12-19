@@ -6,11 +6,18 @@
   <body>
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
-      <a href="/meetings/new">Create Meeting</a>
+
+      <% if(currentUser) { %>
+        <a href="/meetings/new">Create Meeting</a>
+      <% } %>
 
       <h1>Meetings</h1>
 
+      <% if(currentUser && currentUser.isAdmin()) { %>
+        <a href="/meetings/new" class="btn btn-success">New Meeting</a>
+      <% } %>
       <ul class="list-group">
+
 <!-- #1 -->
         <% meetings.forEach((meeting) => { %>
 <!-- #2 -->
