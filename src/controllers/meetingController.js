@@ -12,24 +12,27 @@ module.exports = {
       });
     },
 
+
     new(req, res, next){
       res.render("meetings/new");
     },
 
     create(req, res, next){
-      let newMeeting = {
-        title: req.body.title,
-        description: req.body.description
-      };
+			let newMeeting = {
+			  title: req.body.title,
+			  description: req.body.description,
+			  host: req.body.host
+			};
+	  
+			meetingQueries.addMeeting(newMeeting, (err, meeting) => {
+			  if(err){
+				res.redirect(500, "meetings/new");
+			  } else {
+				res.redirect(303, `/meetings/${meeting.id}`);
+			  }
+			});
+		  },
 
-      meetingQueries.addMeeting(newMeeting, (err, meeting) => {
-        if(err){
-          res.redirect(500, "/meetings/new");
-        } else {
-          res.redirect(300, `/meetings/${meeting.id}`);
-        }
-      });
-    },
 
     show(req, res, next){
       meetingQueries.getMeeting(req.params.id, (err, meeting) => {
@@ -70,6 +73,5 @@ module.exports = {
              }
            });
          }
-
          
   }

@@ -1,4 +1,5 @@
 const Meeting = require("./models").Meeting;
+const Post = require("./models").Post;
 
 module.exports = {
 
@@ -16,7 +17,8 @@ module.exports = {
   addMeeting(newMeeting, callback){
     return Meeting.create({
       title: newMeeting.title,
-      description: newMeeting.description
+      description: newMeeting.description,
+      host: newMeeting.host
     })
     .then((meeting) => {
       callback(null, meeting);
@@ -26,8 +28,14 @@ module.exports = {
     })
   },
 
+
   getMeeting(id, callback){
-    return Meeting.findById(id)
+    return Meeting.findById(id, {
+      include: [{
+        model: Post,
+        as: "posts"
+      }]
+    })
     .then((meeting) => {
       callback(null, meeting)
     })
