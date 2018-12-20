@@ -4,11 +4,13 @@ module.exports = {
       const meetingRoutes = require("../routes/meetings");
       const postRoutes = require("../routes/posts");
       const userRoutes = require("../routes/users");
-
+      const discussionRoutes = require("../routes/discussions");
       app.use(staticRoutes);
       app.use(meetingRoutes);
       app.use(postRoutes);
       app.use(userRoutes);
+      app.use(discussionRoutes);
+      
       
     }
   }

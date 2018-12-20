@@ -14,12 +14,11 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Home </a>       
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/meetings">Meetings </a>    
-          </li>
-
           <% if(currentUser) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/meetings">Meetings </a>    
+            </li>
+          
             <li class="nav-item">
               <a class="nav-link" href="/users/sign_out">Sign out</a>
             </li>

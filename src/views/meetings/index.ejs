@@ -7,9 +7,9 @@
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
 
-      <% if(currentUser) { %>
+      <!-- <% if(currentUser) { %>
         <a href="/meetings/new">Create Meeting</a>
-      <% } %>
+      <% } %> -->
 
       <h1>Meetings</h1>
 
@@ -18,9 +18,9 @@
       <% } %>
       <ul class="list-group">
 
-<!-- #1 -->
+
         <% meetings.forEach((meeting) => { %>
-<!-- #2 -->
+
           <li class="list-group-item">
             <a href="/meetings/<%= meeting.id %>"> <%= meeting.title %> </a>
           </li>

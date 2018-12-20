@@ -32,7 +32,7 @@ module.exports = {
       if(authorized) {
         let newMeeting = {
           title: req.body.title,
-          description: req.body.description
+          description: req.body.description,
         };
         meetingQueries.addMeeting(newMeeting, (err, meeting) => {
           if(err){
@@ -60,46 +60,41 @@ module.exports = {
     },
 
     destroy(req, res, next){
-
-      // #1
-          meetingQueries.deleteMeeting(req, (err, meeting) => {
-            if(err){
-              res.redirect(err, `/meetings/${req.params.id}`)
-            } else {
-              res.redirect(303, "/meetings")
-            }
-          });
-        },
+      meetingQueries.deleteMeeting(req, (err, meeting) => {
+        if(err){
+          res.redirect(err, `/meetings/${req.params.id}`)
+        } else {
+          res.redirect(303, "/meetings")
+        }
+      });
+    },
 
     edit(req, res, next){
+      meetingQueries.getMeeting(req.params.id, (err, meeting) => {
+        if(err || meeting == null){
+          res.redirect(404, "/");
+        } else {
 
-          meetingQueries.getMeeting(req.params.id, (err, meeting) => {
-            if(err || meeting == null){
-              res.redirect(404, "/");
-            } else {
-  
-              const authorized = new Authorizer(req.user, meeting).edit();
- 
-              if(authorized){
-                res.render("meetings/edit", {meeting});
-              } else {
-                req.flash("You are not authorized to do that.")
-                res.redirect(`/meetings/${req.params.id}`)
-              }
-            }
-          });
-        },
+          const authorized = new Authorizer(req.user, meeting).edit();
 
-        update(req, res, next){
+          if(authorized){
+            res.render("meetings/edit", {meeting});
+          } else {
+            req.flash("You are not authorized to do that.")
+            res.redirect(`/meetings/${req.params.id}`)
+          }
+        }
+      });
+    },
 
-          // #1
-              meetingQueries.updateMeeting(req, req.body, (err, meeting) => {
-                if(err || meeting == null){
-                  res.redirect(401, `/meetings/${req.params.id}/edit`);
-                } else {
-                  res.redirect(`/meetings/${req.params.id}`);
-                }
-              });
-            }
+    update(req, res, next){
+      meetingQueries.updateMeeting(req, req.body, (err, meeting) => {
+        if(err || meeting == null){
+          res.redirect(401, `/meetings/${req.params.id}/edit`);
+        } else {
+          res.redirect(`/meetings/${req.params.id}`);
+        }
+      });
+    }
          
   }

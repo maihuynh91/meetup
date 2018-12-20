@@ -19,8 +19,6 @@
 
     <form action="/users" method="post">
 
-
-
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -39,15 +37,9 @@
           placeholder="Enter password confirmation">
       </div>
 
-      <button type="submit" class="btn btn-primary">Pay To Sign Up</button>
+      <button type="submit" class="btn btn-primary"> Sign Up</button>
 
-      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_smbTUhXki8jVgxnZbi53Vjm4"
-        data-amount="1500" data-name="Blocipedia" data-description="Premium Plan" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-        data-locale="auto" data-zip-code="true">
-        </script>
-      <script>
-        document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
-      </script>
+      
 
     </form>
   </main>

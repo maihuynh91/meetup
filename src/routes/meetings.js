@@ -12,3 +12,4 @@ router.get("/meetings/:id/edit", meetingController.edit);
 router.post("/meetings/:id/update", meetingController.update);
 
 module.exports = router;
+

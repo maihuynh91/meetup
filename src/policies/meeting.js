@@ -2,7 +2,6 @@ const ApplicationPolicy = require("./application");
 
 module.exports = class MeetingPolicy extends ApplicationPolicy {
 
- // #2
   new() {
     return this._isAdmin();
   }
@@ -11,7 +10,6 @@ module.exports = class MeetingPolicy extends ApplicationPolicy {
     return this.new();
   }
 
- // #3
   edit() {
     return this._isAdmin();
   }
@@ -23,4 +21,5 @@ module.exports = class MeetingPolicy extends ApplicationPolicy {
   destroy() {
     return this.update();
   }
+
 }

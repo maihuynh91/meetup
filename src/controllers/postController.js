@@ -1,7 +1,6 @@
-
 const postQueries = require("../db/queries.posts.js");
 
-module.exports = {
+module.exports={
     new(req, res, next){
         res.render("posts/new", {meetingId: req.params.meetingId});
       },
@@ -31,7 +30,7 @@ module.exports = {
           }
         });
       },
-
+    
     destroy(req, res, next){
         postQueries.deletePost(req.params.id, (err, deletedRecordsCount) => {
             if(err){
@@ -40,7 +39,7 @@ module.exports = {
             res.redirect(303, `/meetings/${req.params.meetingId}`)
             }
         });
-        },
+    },
 
     edit(req, res, next){
         postQueries.getPost(req.params.id, (err, post) => {
@@ -61,5 +60,8 @@ module.exports = {
             }
         });
         }
+    
+
+
 
 }

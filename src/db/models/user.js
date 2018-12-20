@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
    role: {
     type: DataTypes.STRING,
     allowNull: false,
-    defaultValue: "member"
+    defaultValue: "guest"
   },
   
    
@@ -27,6 +27,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "userId",
       as: "posts"
     });
+
+    User.hasMany(models.Discussion, {
+      foreignKey: "userId",
+      as: "discussions"
+    });
+
+
   };
 
   User.prototype.isAdmin = function() {

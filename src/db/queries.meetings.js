@@ -1,11 +1,11 @@
 const Meeting = require("./models").Meeting;
 const Post = require("./models").Post;
+const Authorizer = require("../policies/meeting");
 
 module.exports = {
 
   getAllMeetings(callback){
     return Meeting.all()
-
     .then((meetings) => {
       callback(null, meetings);
     })
@@ -46,23 +46,19 @@ module.exports = {
 
   deleteMeeting(req, callback){
 
-    // #1
         return Meeting.findById(req.params.id)
         .then((meeting) => {
    
-    // #2
           const authorized = new Authorizer(req.user, meeting).destroy();
    
           if(authorized) {
-    // #3
+
             meeting.destroy()
             .then((res) => {
               callback(null, meeting);
             });
             
           } else {
-   
-    // #4
             req.flash("notice", "You are not authorized to do that.")
             callback(401);
           }
@@ -73,40 +69,34 @@ module.exports = {
       },
       
 
-      updateMeeting(req, updatedMeeting, callback){
+  updateMeeting(req, updatedMeeting, callback){
 
-        // #1
-             return Meeting.findById(req.params.id)
-             .then((meeting) => {
-        
-        // #2
-               if(!meeting){
-                 return callback("Meeting not found");
-               }
-        
-        // #3
-               const authorized = new Authorizer(req.user, meeting).update();
-        
-               if(authorized) {
-        
-        // #4
-                 meeting.update(updatedMeeting, {
-                   fields: Object.keys(updatedMeeting)
-                 })
-                 .then(() => {
-                   callback(null, meeting);
-                 })
-                 .catch((err) => {
-                   callback(err);
-                 });
-               } else {
-        
-        // #5
-                 req.flash("notice", "You are not authorized to do that.");
-                 callback("Forbidden");
-               }
-             });
-           }
+    return Meeting.findById(req.params.id)
+    .then((meeting) => {
+
+      if(!meeting){
+        return callback("Meeting not found");
+      }
+      const authorized = new Authorizer(req.user, meeting).update();
+
+      if(authorized) {
+
+        meeting.update(updatedMeeting, {
+          fields: Object.keys(updatedMeeting)
+        })
+        .then(() => {
+          callback(null, meeting);
+        })
+        .catch((err) => {
+          callback(err);
+        });
+      } else {
+
+        req.flash("notice", "You are not authorized to do that.");
+        callback("Forbidden");
+      }
+    });
+  }
 
 
 }
