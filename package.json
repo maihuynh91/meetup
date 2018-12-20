@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js"
+    "test": "set NODE_ENV=test&&jasmine",
+    "start": "node src/server.js",
+    "start-local": "nodemon src/server.js"
   },
   "author": "maihuynh",
   "license": "ISC",
@@ -23,10 +24,13 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "express-validator": "^5.0.2",
+    "keyframe": "^2.1.0",
+    "nodemon": "^1.18.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.32.6"
+    "sequelize": "^4.32.6",
+    "stripe": "^6.19.0"
   }
 }

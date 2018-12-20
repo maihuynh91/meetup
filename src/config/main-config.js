@@ -29,5 +29,6 @@ module.exports = {
     })
     
     app.use(express.static(path.join(__dirname, "..", "assets")));
+    //create route (root) folder to all contents in the assets
   }
 };

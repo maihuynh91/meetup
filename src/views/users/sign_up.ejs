@@ -1,43 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../static/partials/head.ejs %>
-  </head>
-  <body>
 
-    <% include ../static/partials/navbar.ejs %>
+<head>
+  <% include ../static/partials/head.ejs %>
+</head>
 
-    <main class="container">
-        <br/>
-        
-      <% include ../static/partials/messages.ejs %>
+<body>
 
-      <h1>Sign up</h1>
+  <% include ../static/partials/navbar.ejs %>
 
-      <form action="/users" method="post">
+  <main class="container">
+    <br />
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-          <small class="text-muted" id="emailHelp">email address must be a valid address</small>
-        </div>
+    <% include ../static/partials/messages.ejs %>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" aria-describedby="passwordHelp" placeholder="Enter password">
-          <small class="text-muted" id="passwordHelp">password must match confirmation below</small>
-        </div>
+    <h1>Sign up</h1>
 
-        <div class="form-group">
-          <label for="passwordConfirmation">Password confirmation</label>
-          <input type="password" class="form-control" name="passwordConfirmation" aria-describedby="passwordHelp" placeholder="Enter password confirmation">
-        </div>
 
-        <button type="submit" class="btn btn-primary">Sign up</button>
-      </form>
-    </main>
+    <form action="/users" method="post">
 
-    <% include ../static/partials/baseScripts.ejs %>
 
-  </body>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+        <small class="text-muted" id="emailHelp">email address must be a valid address</small>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" aria-describedby="passwordHelp" placeholder="Enter password">
+        <small class="text-muted" id="passwordHelp">password must match confirmation below</small>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordConfirmation">Password confirmation</label>
+        <input type="password" class="form-control" name="passwordConfirmation" aria-describedby="passwordHelp"
+          placeholder="Enter password confirmation">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Pay To Sign Up</button>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_smbTUhXki8jVgxnZbi53Vjm4"
+        data-amount="1500" data-name="Blocipedia" data-description="Premium Plan" data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto" data-zip-code="true">
+        </script>
+      <script>
+        document.getElementsByClassName('stripe-button-el')[0].style.display = 'none';
+      </script>
+
+    </form>
+  </main>
+
+  <% include ../static/partials/baseScripts.ejs %>
+
+</body>
+
 </html>
