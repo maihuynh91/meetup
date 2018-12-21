@@ -1,11 +1,11 @@
 const meetingQueries = require("../db/queries.meetings");
-const Authorizer = require("../policies/meeting");
+
 
 module.exports = {
+
     index(req, res, next){
       meetingQueries.getAllMeetings((err, meetings) => {
         if(err){
-          console.log(err);
           res.redirect(500, "static/index");
         } else{
           res.render("meetings/index", {meetings})
@@ -15,37 +15,22 @@ module.exports = {
 
 
     new(req, res, next){
-      const authorized = new Authorizer(req.user).new();
-  
-      if(authorized) {
-        res.render("meetings/new");
-      } else {
-        req.flash("notice", "You are not authorized to do that.");
-        res.redirect("/meetings");
-      }
-        },
+      res.render("meetings/new");
+      },
 
     create(req, res, next){
-
-      const authorized = new Authorizer(req.user).create();
-  
-      if(authorized) {
-        let newMeeting = {
-          title: req.body.title,
-          description: req.body.description,
-        };
-        meetingQueries.addMeeting(newMeeting, (err, meeting) => {
-          if(err){
-            res.redirect(500, "meetings/new");
-          } else {
-            res.redirect(303, `/meetings/${meeting.id}`);
-          }
-        });
-      } else {
-
-        req.flash("notice", "You are not authorized to do that.");
-        res.redirect("/meetings");
-      }
+      let newMeeting = {
+        title: req.body.title,
+        description: req.body.description,
+        date: req.body.date
+      };
+      meetingQueries.addMeeting(newMeeting, (err, meeting) => {
+        if(err){
+        res.redirect(500, "/meetings/new");
+        } else {
+        res.redirect(303, `/meetings/${meeting.id}`);
+        }
+      });
     },
 
 
@@ -60,9 +45,9 @@ module.exports = {
     },
 
     destroy(req, res, next){
-      meetingQueries.deleteMeeting(req, (err, meeting) => {
+      meetingQueries.deleteMeeting(req.params.id, (err, meeting) => {
         if(err){
-          res.redirect(err, `/meetings/${req.params.id}`)
+          res.redirect(500, `/meetings/${meeting.id}`)
         } else {
           res.redirect(303, "/meetings")
         }
@@ -72,29 +57,22 @@ module.exports = {
     edit(req, res, next){
       meetingQueries.getMeeting(req.params.id, (err, meeting) => {
         if(err || meeting == null){
-          res.redirect(404, "/");
+        res.redirect(404, "/");
         } else {
-
-          const authorized = new Authorizer(req.user, meeting).edit();
-
-          if(authorized){
-            res.render("meetings/edit", {meeting});
-          } else {
-            req.flash("You are not authorized to do that.")
-            res.redirect(`/meetings/${req.params.id}`)
-          }
+        res.render("meetings/edit", {meeting});
         }
       });
-    },
+      },
 
-    update(req, res, next){
-      meetingQueries.updateMeeting(req, req.body, (err, meeting) => {
-        if(err || meeting == null){
-          res.redirect(401, `/meetings/${req.params.id}/edit`);
-        } else {
-          res.redirect(`/meetings/${req.params.id}`);
-        }
-      });
-    }
-         
+      update(req, res, next){
+
+             meetingQueries.updateMeeting(req.params.id, req.body, (err, meeting) => {
+ 
+               if(err || meeting == null){
+                 res.redirect(404, `/meetings/${req.params.id}/edit`);
+               } else {
+                 res.redirect(`/meetings/${meeting.id}`);
+               }
+             });
+           }
   }

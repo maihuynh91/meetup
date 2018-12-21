@@ -7,20 +7,15 @@
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
 
-      <!-- <% if(currentUser) { %>
-        <a href="/meetings/new">Create Meeting</a>
-      <% } %> -->
+      <h1>Meetings</h1> 
+      <a href = "/meetings/new">New Meeting</a>
 
-      <h1>Meetings</h1>
-
-      <% if(currentUser && currentUser.isAdmin()) { %>
-        <a href="/meetings/new" class="btn btn-success">New Meeting</a>
-      <% } %>
       <ul class="list-group">
 
 
         <% meetings.forEach((meeting) => { %>
 
+          
           <li class="list-group-item">
             <a href="/meetings/<%= meeting.id %>"> <%= meeting.title %> </a>
           </li>
@@ -29,4 +24,3 @@
 
     </main>
   </body>
-</html>

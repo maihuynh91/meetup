@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Discussions', {
+    return queryInterface.createTable('Comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,14 +12,14 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      postId: {
+      meetingId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         allowNull: false,
         references: {
-          model: "Posts",
+          model: "Meetings",
           key: "id",
-          as: "postId"
+          as: "meetingId"
         }
       },
       userId: {
@@ -43,6 +43,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Discussions');
+    return queryInterface.dropTable('Comments');
   }
 };

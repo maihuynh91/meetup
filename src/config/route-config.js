@@ -2,14 +2,14 @@ module.exports = {
     init(app){
       const staticRoutes = require("../routes/static");
       const meetingRoutes = require("../routes/meetings");
-      const postRoutes = require("../routes/posts");
+     
       const userRoutes = require("../routes/users");
-      const discussionRoutes = require("../routes/discussions");
+      const commentRoutes = require("../routes/comments");
       app.use(staticRoutes);
       app.use(meetingRoutes);
-      app.use(postRoutes);
+      app.use(commentRoutes);
       app.use(userRoutes);
-      app.use(discussionRoutes);
+   
       
       
     }

@@ -9,15 +9,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING,
     },
+    date: {
+      allowNull: false,
+      type:  DataTypes.DATE
+    },
   
-
   }, {});
   Meeting.associate = function(models) {
     // associations can be defined here
-    Meeting.hasMany(models.Post, {
+    Meeting.hasMany(models.Comment, {
       foreignKey: "meetingId",
-      as: "posts"
+      as: "comments"
     });
+    
   };
   return Meeting;
 };
