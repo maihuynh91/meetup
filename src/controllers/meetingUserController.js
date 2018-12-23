@@ -11,17 +11,19 @@ module.exports = {
                 userId:req.user.id,
                 meetingId:req.params.meetingId
             };
-            meetingUserQueries.createMeetingUser(newMeetingUser, (err, meetingUser) => {
+            meetingUserQueries.createMeetingUser(newMeetingUser, (err, result) => {
                 if(err){
                     req.flash("error", err);
                 }
                 res.redirect(req.headers.referer);
+                
             });
         } else {
             req.flash("notice", "You must be signed in to do that.")
             req.redirect("/users/sign_in");
             }
     },
+    
 
     destroy(req, res, next){
         meetingUserQueries.deleteMeetingUser(req, (err, meetingUser) => {

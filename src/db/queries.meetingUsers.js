@@ -5,14 +5,24 @@ const Authorizer = require("../policies/meetingUser");
 module.exports = {
 
     createMeetingUser(newMeetingUser, callback){
-        return MeetingUser.create(newMeetingUser)
-        .then((meetingUser) => {
-            callback(null, meetingUser);
-        })
-        .catch((err) => {
-            callback(err);
-        })
-    },
+        return MeetingUser.findAll({
+            where: {
+              userId:newMeetingUser.userId
+            }
+          }).then(meetingUsers=>{
+              if(meetingUsers && meetingUsers.length>0){
+                callback(null,null);
+              }else{
+                MeetingUser.create(newMeetingUser)
+                .then((meetingUser) => {
+                    callback(null, meetingUser);
+                })
+                .catch((err) => {
+                    callback(err);
+                })
+              }});
+          }    
+    ,
 
     deleteMeetingUser(req, callback){
         return MeetingUser.findById(req.params.id)

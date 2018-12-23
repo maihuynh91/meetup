@@ -28,33 +28,41 @@
       <h4>Details:</h4>
       <p><%= meeting.description %></p>
 
+      <%=JSON.stringify(meeting)%>
+
       <section id="comment-form">
-
-          <!-- #1 -->
-             <% if(currentUser) { %>
-               <% include ../comments/new.ejs %>
-             <% } %>
-            </section>
+        <% if(currentUser) { %>
+          <% include ../comments/new.ejs %>
+        <% } %>
+      </section>
          
-          <!-- #2 -->
-            <section id="comment-list">
-             <% if(meeting.comments) { %>
-              <% meeting.comments.forEach((comment) => { %>
-               
-          <!-- #3 -->
-                 <%- include('../comments/show.ejs', {comment}) %>
-               <% }) %>
-             <% } %>
-            </section>
+       
+      <section id="comment-list">
+        <% if(meeting.comments) { %>
+        <% meeting.comments.forEach((comment) => { %>
 
-            <section id="meetingUser-form">
+            <%- include('../comments/show.ejs', {comment}) %>
+          <% }) %>
+        <% } %>
+      </section>
 
-              <!-- #1 -->
-                 <% if(currentUser) { %>
-                   <% include ../meetingUser/new.ejs %>
-                 <% } %>
-                </section>
-     
+      <section id="meetingUser-form">
+            <% if(currentUser) { %>
+              <% include ../meetingUsers/new.ejs %>
+            <% } %>
+      </section>
+      <hr />
+      <section id="meetingUser-list">
+        
+
+          <% if(meeting.meetingUsers) { %>
+           <% meeting.meetingUsers.forEach((meetingUser) => { %>
+            
+              <%- include('../meetingUsers/show.ejs', {meetingUser}) %>
+            <% }) %>
+          <% } %>
+      </section>
+
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

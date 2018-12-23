@@ -2,6 +2,7 @@ const Meeting = require("./models").Meeting;
 const Comment = require("./models").Comment;
 const User = require("./models").User;
 const Authorizer = require("../policies/meeting");
+const MeetingUser = require("./models").MeetingUser;
 
 module.exports = {
 
@@ -34,8 +35,10 @@ module.exports = {
       include: [{
         model: Comment, as: "comments", include: [
           { model: User }
-        ]
-      }]
+        ]},
+    { model: MeetingUser, as: "meetingUsers", include: [
+      { model: User }
+    ] }]
     })
       .then((meeting) => {
         callback(null, meeting);

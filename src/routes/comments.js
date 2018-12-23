@@ -13,7 +13,7 @@ router.post("/meetings/:meetingId/comments/create",
 
 router.post("/meetings/:meetingId/comments/:id/destroy",
     helper.ensureAuthenticated,
-    validation.validateComments,
+    // validation.validateComments,
     commentController.destroy
   );
  
