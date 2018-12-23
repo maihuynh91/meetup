@@ -1,13 +1,15 @@
 
 const MeetingUser = require("./models").MeetingUser;
 const Authorizer = require("../policies/meetingUser");
+const Meeting = require("./models").Meeting;
 
 module.exports = {
 
     createMeetingUser(newMeetingUser, callback){
         return MeetingUser.findAll({
             where: {
-              userId:newMeetingUser.userId
+              userId:newMeetingUser.userId,
+              meetingId:newMeetingUser.meetingId
             }
           }).then(meetingUsers=>{
               if(meetingUsers && meetingUsers.length>0){
