@@ -24,7 +24,7 @@ module.exports = {
 
           passport.authenticate("local")(req, res, () => {
             req.flash("notice", "You've successfully signed up to Meetup!");
-            res.redirect("/meetings");
+            res.redirect("/about");
           })
              }
            });

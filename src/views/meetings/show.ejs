@@ -46,6 +46,14 @@
                <% }) %>
              <% } %>
             </section>
+
+            <section id="meetingUser-form">
+
+              <!-- #1 -->
+                 <% if(currentUser) { %>
+                   <% include ../meetingUser/new.ejs %>
+                 <% } %>
+                </section>
      
     </main>
 
