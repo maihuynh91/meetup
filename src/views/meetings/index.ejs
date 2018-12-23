@@ -6,10 +6,10 @@
   <body>
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
-
+      <br />
 
       <% if(currentUser && currentUser.isAdmin()) { %>
-      <a href = "/meetings/new">New Meeting</a>
+      <a class="btn btn-info" href = "/meetings/new">New Meeting</a>
       <% } %>
 
       <h1>Meetings</h1> 

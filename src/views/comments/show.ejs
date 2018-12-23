@@ -1,4 +1,5 @@
 <% if(comment) { %>
+  <!-- <%=JSON.stringify(meeting)%> -->
   <div style="width: 50%">
     <hr>
     <p>
@@ -12,7 +13,7 @@
  <!-- #3 -->
     <!-- <% if(currentUser && currentUser.id === comment.userId || currentUser.isAdmin()) { %> -->
       <form style="display:initial"
-            action="/meetings/<%= meeting.meetingId %>/comments/<%= comment.id %>/destroy"
+            action="/meetings/<%= meeting.id %>/comments/<%= comment.id %>/destroy"
             method="post">
         <button type="submit" class="btn btn btn-sm btn-outline-danger">Delete</button>
       </form>
