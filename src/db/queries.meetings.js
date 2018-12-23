@@ -1,6 +1,8 @@
 const Meeting = require("./models").Meeting;
 const Comment = require("./models").Comment;
 const User = require("./models").User;
+const Authorizer = require("../policies/meeting");
+
 module.exports = {
 
   getAllMeetings(callback) {
@@ -43,35 +45,50 @@ module.exports = {
       })
   },
 
-  deleteMeeting(id, callback) {
-    return Meeting.destroy({
-      where: { id }
-    })
-      .then((meeting) => {
+  deleteMeeting(req, callback){
+    return Meeting.findById(req.params.id)
+    .then((meeting) => {
+
+    const authorized = new Authorizer(req.user, meeting).destroy();  
+    if(authorized) {
+      meeting.destroy()
+      .then((res) => {
         callback(null, meeting);
-      })
-      .catch((err) => {
-        callback(err);
-      })
+      });      
+    } else {
+      req.flash("notice", "You are not authorized to do that.")
+      callback(401);
+    }
+    })
+    .catch((err) => {
+      callback(err);
+    });
   },
 
-  updateMeeting(id, updatedMeeting, callback) {
-    return Meeting.findById(id)
+  updateMeeting(req, updatedMeeting, callback) {
+    return Meeting.findById(req.params.id)
       .then((meeting) => {
         if (!meeting) {
           return callback("Meeting not found");
         }
-        meeting.update(updatedMeeting, {
-          fields: Object.keys(updatedMeeting)
-        })
-          .then(() => {
-            callback(null, meeting);
+        const authorized = new Authorizer(req.user, meeting).update();
+        if(authorized){
+          meeting.update(updatedMeeting, {
+            fields: Object.keys(updatedMeeting)
           })
-          .catch((err) => {
-            callback(err);
-          });
-      });
-  }
+            .then(() => {
+              callback(null, meeting);
+            })
+            .catch((err) => {
+              callback(err);
+            });
+          } else {
+            req.flash("notice", "You are not authorized to do that.");
+            callback("Forbidden");
+          }
+        });
+        }
+
 
 
 

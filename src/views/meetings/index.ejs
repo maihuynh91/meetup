@@ -7,14 +7,16 @@
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
 
-      <h1>Meetings</h1> 
+
+      <% if(currentUser && currentUser.isAdmin()) { %>
       <a href = "/meetings/new">New Meeting</a>
+      <% } %>
+
+      <h1>Meetings</h1> 
 
       <ul class="list-group">
 
-
         <% meetings.forEach((meeting) => { %>
-
           
           <li class="list-group-item">
             <a href="/meetings/<%= meeting.id %>"> <%= meeting.title %> </a>

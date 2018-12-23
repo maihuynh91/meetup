@@ -9,12 +9,13 @@ module.exports = {
     if(req.method === "POST") {
       req.checkBody("email", "must be valid").isEmail();
      req.checkBody("password", "must be at least 6 characters in length").isLength({min: 6})
+     req.checkBody("password", "must have no spaces.").custom(value => !/\s/.test(value))
      req.checkBody("passwordConfirmation", "must match password provided").optional().matches(req.body.password);
    }
    const errors = req.validationErrors();
    if (errors) {
      req.flash("error", errors);
-     return res.redirect(req.headers.referer);
+     return res.redirect(303, req.headers.referer);
    } else {
      return next();
    }
@@ -26,7 +27,6 @@ module.exports = {
       req.checkBody("title", "must be at least 5 characters in length").isLength({min: 5});
       req.checkBody("description", "must be at least 10 characters in length").isLength({min: 10});
     }
-//express "flash" module loads messages by using "req.flash"
     const errors = req.validationErrors();
     if (errors) {
       req.flash("error", errors);

@@ -9,11 +9,16 @@
 
     <main class="container">
       <br />
+      <a class="btn btn-info" href="/meetings">Back to Meetings</a>
+
+      <% if(currentUser && currentUser.isAdmin()) { %>
       <a href="/meetings/<%= meeting.id %>/edit" class="btn btn-warning">Edit</a>
       
       <form style="display:initial" action="/meetings/<%= meeting.id %>/destroy" method="post">
         <button type="submit" class="btn btn-danger">Delete</button>
       </form>
+      <% } %>
+
       <h1><%= meeting.title %></h1> 
 
       <h6>Hosted by: </h6>
@@ -34,10 +39,10 @@
           <!-- #2 -->
             <section id="comment-list">
              <% if(meeting.comments) { %>
-               <% meeting.comments.forEach((comment) => { %>
-         
+              <% meeting.comments.forEach((comment) => { %>
+               
           <!-- #3 -->
-                 <%- include("../comments/show.ejs", {comment}) %>
+                 <%- include('../comments/show.ejs', {comment}) %>
                <% }) %>
              <% } %>
             </section>

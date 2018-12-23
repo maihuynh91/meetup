@@ -20,6 +20,18 @@ module.exports = {
         })
       },
 
+      getUser(id, callback){
+        return User.findById(id)
+        .then((user)=>{
+          callback(null, user);
+        })
+        .catch((err)=>{
+          callback(err);
+        })
+      },
+
+     
+
     
     
     }
