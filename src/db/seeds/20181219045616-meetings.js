@@ -10,6 +10,7 @@ const faker = require("faker");
   meetings.push({
      title: faker.hacker.noun(),
      description: faker.hacker.phrase(),
+     body:faker.lorem.paragraphs(),
      date: faker.date.between('2019-01-01', '2019-12-31'),
      createdAt: new Date(),
      updatedAt: new Date()

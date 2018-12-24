@@ -19,6 +19,7 @@ module.exports = {
   addMeeting(newMeeting, callback) {
     return Meeting.create({
       title: newMeeting.title,
+      body: newMeeting.body,
       description: newMeeting.description,
       date: newMeeting.date
     })

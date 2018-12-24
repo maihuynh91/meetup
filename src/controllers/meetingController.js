@@ -31,6 +31,7 @@ module.exports = {
     if (authorized) {
       let newMeeting = {
         title: req.body.title,
+        body: req.body.body,
         description: req.body.description,
         date: req.body.date
       };
@@ -55,7 +56,9 @@ module.exports = {
         if (err || meeting == null) {
           res.redirect(404, "/")
         } else {
-          res.render("meetings/show", { meeting });
+          let currentMeetingUser = meeting.meetingUsers.filter(meetingUser => req.user.id === meetingUser.userId)[0];
+         
+          res.render("meetings/show", { meeting,currentMeetingUser });
         }
       });
     } else {

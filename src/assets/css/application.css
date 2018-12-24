@@ -33,3 +33,6 @@ a.anchor-no-decor:visited {
 .chunk:after {
   clear: both;
 }
+body{
+  background-color: lavender;
+}

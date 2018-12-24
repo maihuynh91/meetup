@@ -1,61 +1,14 @@
 <% if(meetingUser) { %>
-   <!-- <%=JSON.stringify(meetingUser)%> -->
-    <div style="width: 50%">
-     
-      <small class="card-subtitle mb-2 text-muted">
-  
-        Attendee: <%= meetingUser.User.username %> 
-      </small>
-      <small class="card-subtitle mb-2 text-muted">
-  
-         <img src="<%= meetingUser.User.image %>" />
-      </small>
-  <!--test attendee-->
-   <!-- #3 -->
-   <% if(currentUser && currentUser.id === meetingUser.userId || currentUser.isAdmin()) { %> -->
+<!-- <%=JSON.stringify(meetingUser)%> -->
+<div class="card">
 
-    <form style="display:initial"
-          action="/meetings/<%= meeting.id %>/meetingUser/<%= meetingUser.id %>/destroy"
-          method="post">
-      <button type="submit" class="btn btn btn-sm btn-outline-danger">Cancel Registration</button>
-    </form>
-  <% } %>
-    <div>
-    
-    </div>
+  <div class="box-part text-center">
 
-    </div>
-  <% } %>
+      <img src="<%= meetingUser.User.image %>" />
 
-  
-  <div class="chunk"><p class="visibility--a11yHide"><span>Go to Attendee List</span></p>
-    <div class="hscrollContainer hscrollGradient--hidden memberListing _memberListing-module_memberListing__1UIn8">
-      <div class="hscroll atMedium_hscroll--unclip">
-        <div class="hscroll-content">
-          <ul class="flex gridList gridList--autoHeight gridList--autoHeight--has4 _memberListing-module_gridList__3a0pb flex--wrap">
-            <li class="gridList-item flex-item _memberListing-module_gridListItem__PtfjP">
-              <div class="gridList-itemInner">
-                <div class="card card--hasHoverShadow groupMember align--center">
-                  <a class="groupMember-link">
-                    
-                
-                  <img class="avatar-print" src="<%= meetingUser.User.image %>" alt="image"/>
-                    </span>
-                    <p class="groupMember-name text--bold text--small padding--top text--ellipsisTwoLines">
-                      <span>Debbie Griffin</span></p><div class="chunk groupMember-content">
-                        <p class="groupMember-role">
-                          <span class="member-role member-role-type-organizer text--smaller text--secondary wrap--singleLine--truncate display--block">
-                            <span>Organizer</span>
-                          </span>
-                        </p>
-                        
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+    <div class="title">
+      <h3> <%= meetingUser.User.username %> </h3>
     </div>
+  </div>
+</div>
+<% } %>

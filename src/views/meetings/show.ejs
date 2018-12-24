@@ -1,77 +1,106 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../static/partials/head.ejs %>
-  </head>
 
-  <body>
-    <% include ../static/partials/navbar.ejs %>
+<head>
+  <% include ../static/partials/head.ejs %>
+  <style>
+    .plate{padding: 5px;border-radius:5px;}
+  </style>
+</head>
 
-    <main class="container">
-      <br />
-      <a class="btn btn-info" href="/meetings">Back to Meetings</a>
+<body>
+  <% include ../static/partials/navbar.ejs %>
 
-      <% if(currentUser && currentUser.isAdmin()) { %>
-      <a href="/meetings/<%= meeting.id %>/edit" class="btn btn-warning">Edit</a>
-      
-      <form style="display:initial" action="/meetings/<%= meeting.id %>/destroy" method="post">
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
-      <% } %>
+  <main class="container">
+    <br />
+    <a class="btn btn-info" href="/meetings">Back to Meetings</a>
 
-      <h1><%= meeting.title %></h1> 
+    <% if(currentUser && currentUser.isAdmin()) { %>
+    <a href="/meetings/<%= meeting.id %>/edit" class="btn btn-warning">Edit</a>
 
-      <h6>Hosted by: Admin</h6>
-      <h6>Meeting date: <%= meeting.date %> </h6>
-      
-      <hr />
-      <h4>Details:</h4>
-      <p><%= meeting.description %></p>
+    <form style="display:initial" action="/meetings/<%= meeting.id %>/destroy" method="post">
+      <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+    <% } %>
 
-      <!-- <%=JSON.stringify(meeting)%> -->
+    <h1>
+      <%= meeting.title %>
+    </h1>
 
-      <% include ../static/partials/calendar.ejs %>
+    <h6>Hosted by: Admin</h6>
+    <h6>Meeting date:
+      <%= meeting.date %>
+    </h6>
 
-      <section id="comment-form">
-        <% if(currentUser) { %>
-          <% include ../comments/new.ejs %>
-        <% } %>
-      </section>
-
-     
+    <hr />
+    <div class="container">
+      <div class="row">
+        <h4>Details:</h4>
+      </div>
+      <div class="row">
+        <div class="card col-8">
+          <div class="card-top">
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <%= meeting.body %>
+            </p>
+          </div>
+        </div>
+        <div class="col-4 ml-auto">
          
-       
-      <section id="comment-list">
-        <% if(meeting.comments) { %>
-        <% meeting.comments.forEach((comment) => { %>
-
-            <%- include('../comments/show.ejs', {comment}) %>
-          <% }) %>
-        <% } %>
-      </section>
-
-      <section id="meetingUser-form">
-            <% if(currentUser) { %>
-              <% include ../meetingUsers/new.ejs %>
-            <% } %>
-      </section>
-      <hr />
-
-     
-      <section id="meetingUser-list">
-        
-
           <% if(meeting.meetingUsers) { %>
-           <% meeting.meetingUsers.forEach((meetingUser) => { %>
-            
-              <%- include('../meetingUsers/show.ejs', {meetingUser}) %>
+          <% if(currentMeetingUser) { %>
+          <div class="row">
+            <form style="display:initial" action="/meetings/<%= meeting.id %>/meetingUser/<%= currentMeetingUser.id %>/destroy"
+              method="post">
+              <button type="submit" class="btn btn btn-sm btn-outline-danger">Cancel Registration</button>
+            </form>
+          </div>
+          <% } else{%>
+          <div class="row">
+            <form style="width:50%" action="/meetings/<%= meeting.id %>/meetingUser/create" method="post">
+              <button type="submit" class="btn btn-primary">Are you going?</button>
+            </form>
+          </div>
+          <% }%>
+          <hr/>
+          <p>Attendees List</p>
+          <div class="row">
+            <% meeting.meetingUsers.forEach((meetingUser) => { %>
+
+            <%- include('../meetingUsers/show.ejs', {meetingUser}) %>
             <% }) %>
-          <% } %>
-      </section>
-    </main>
+            <% } %>
+          </div>
+          <div class="row">
+            <% include ../static/partials/calendar.ejs %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section id="comment-form">
+      <% if(currentUser) { %>
+      <% include ../comments/new.ejs %>
+      <% } %>
+    </section>
 
-    <% include ../static/partials/baseScripts.ejs %>
 
-  </body>
+
+
+    <section id="comment-list">
+      <% if(meeting.comments) { %>
+      <% meeting.comments.forEach((comment) => { %>
+
+      <%- include('../comments/show.ejs', {comment}) %>
+      <% }) %>
+      <% } %>
+    </section>
+   
+  </main>
+ 
+  <% include ../static/partials/baseScripts.ejs %>
+
+</body>
 
 </html>

@@ -11,13 +11,19 @@
     <br />
     <div class="container">
       <div class="row">
-        <div class="col-3">
-          Username: <%= profile.username %> </br>
-          Email: <%= profile.email %> </br>
-          Avatar: <img src="<%= profile.image %>" />
+        <div class="col-2">
+          <div class="row">
+            <%= profile.username %>
+          </div>
+          <div class="row">
+            <%= profile.email %>
+          </div>
+          <div class="row">
+            <img src="<%= profile.image %>" />
+          </div>
         </div>
-        <div>
-          <h1>Your registered meetings</h1>
+        <div class="col-9 ml-auto">
+          <h1>Your meetings</h1>
 
           <div class="container">
             <!-- <%=JSON.stringify(profile)%> -->
