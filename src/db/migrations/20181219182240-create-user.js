@@ -2,6 +2,10 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Users', {
+      image: {
+        type: Sequelize.STRING,
+        allowNull:true
+      },
       id: {
         allowNull: false,
         autoIncrement: true,

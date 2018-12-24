@@ -1,6 +1,6 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
-
+const faker = require("faker");
 
 module.exports = {
 
@@ -11,6 +11,7 @@ module.exports = {
     create(req, res, next){
     
       let newUser = {
+        image: faker.image.avatar(),
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,

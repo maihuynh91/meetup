@@ -6,6 +6,10 @@
   
         Attendee: <%= meetingUser.User.username %> 
       </small>
+      <small class="card-subtitle mb-2 text-muted">
+  
+         <img src="<%= meetingUser.User.image %>" />
+      </small>
   
    <!-- #3 -->
    <% if(currentUser && currentUser.id === meetingUser.userId || currentUser.isAdmin()) { %> -->
@@ -16,7 +20,9 @@
       <button type="submit" class="btn btn btn-sm btn-outline-danger">Cancel Registration</button>
     </form>
   <% } %>
-
+    <div>
+      <% include ../static/partials/calendar.ejs %>
+    </div>
 
     </div>
   <% } %>

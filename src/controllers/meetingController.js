@@ -1,6 +1,6 @@
 const meetingQueries = require("../db/queries.meetings");
 const Authorizer = require("../policies/meeting");
-
+const moment = require('moment');
 module.exports = {
 
   index(req, res, next) {
@@ -8,7 +8,7 @@ module.exports = {
       if (err) {
         res.redirect(500, "static/index");
       } else {
-        res.render("meetings/index", { meetings })
+        res.render("meetings/index", { meetings,moment })
       }
     });
   },
