@@ -4,8 +4,8 @@ const helper = require("../auth/helpers");
 const meetingController = require("../controllers/meetingController");
 const validation = require("./validation");
 
-router.get("/meetings", meetingController.index);
-router.get("/meetings/new", meetingController.new);
+router.get("/meetings",  helper.ensureAuthenticated, meetingController.index);
+router.get("/meetings/new",  helper.ensureAuthenticated, meetingController.new);
 router.post("/meetings/create", 
     helper.ensureAuthenticated,
     validation.validateMeetings,

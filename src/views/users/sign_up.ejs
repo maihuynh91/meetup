@@ -16,6 +16,12 @@
 
 
     <form action="/users" method="post">
+      
+      <div class="form-group">
+        <label>UserName:</label>
+        <input type="text" name="username" placeholder="Enter Username" class="form-control"/>
+        <small class="text-muted" id="usernameHelp">username must be at least 3 characters in length</small>
+      </div>
 
       <div class="form-group">
         <label for="email">Email</label>
