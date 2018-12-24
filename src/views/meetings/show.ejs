@@ -30,6 +30,8 @@
 
       <!-- <%=JSON.stringify(meeting)%> -->
 
+      <% include ../static/partials/calendar.ejs %>
+
       <section id="comment-form">
         <% if(currentUser) { %>
           <% include ../comments/new.ejs %>

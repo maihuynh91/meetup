@@ -25,3 +25,11 @@ a.anchor-no-decor:visited {
   text-decoration: inherit;
   color: inherit;
 }
+
+.chunk:before {
+  content: " ";
+  display: table;
+}
+.chunk:after {
+  clear: both;
+}

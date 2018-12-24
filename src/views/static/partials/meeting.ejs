@@ -1,0 +1,24 @@
+<a href="/meetings/<%= meeting.id %>" class="row row-striped anchor-no-decor">
+    <div class="col-2 text-right">
+        <h1 class="display-4"><span class="badge badge-secondary">
+                <%=moment(meeting.date).format('DD')%></span></h1>
+        <h2>
+            <%=moment(meeting.date).format('MMM').toUpperCase()%>
+        </h2>
+    </div>
+    <div class="col-10">
+        <h3 class="text-uppercase"><strong>
+                <%=meeting.title%></strong></h3>
+        <ul class="list-inline">
+            <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i>
+                <%=moment(meeting.date).format('dddd')%>
+            </li>
+            <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                <%=moment(meeting.date).format('hh:mm A')%>
+            </li>
+        </ul>
+        <p>
+            <%=meeting.description%>
+        </p>
+    </div>
+</a>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../static/partials/head.ejs %>
+</head>
+
+<body>
+  <main class="container">
+    <% include ../static/partials/navbar.ejs %>
+    <br />
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          Username: <%= profile.username %> </br>
+          Email: <%= profile.email %> </br>
+          Avatar: <img src="<%= profile.image %>" />
+        </div>
+        <div>
+          <h1>Your registered meetings</h1>
+
+          <div class="container">
+            <!-- <%=JSON.stringify(profile)%> -->
+            <% profile.meetingUsers.forEach((meetingUser) => { %>
+            <%- include('../static/partials/meeting.ejs', {meeting:meetingUser.Meeting}) %>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
