@@ -15,6 +15,7 @@ for(let i = 1 ; i <= 20 ; i++){
    email: faker.internet.email(),
    password: hashedPassword,
    role: "member",
+   image:faker.image.avatar(),
    createdAt: new Date(),
    updatedAt: new Date(),
  });
