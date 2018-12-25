@@ -1,5 +1,5 @@
 const meetingUserQueries = require("../db/queries.meetingUsers");
-const Authorizer = require("../policies/meetingUser.js");
+const Authorizer = require("../policies/meetinguser.js");
 
 module.exports = {
 

@@ -1,6 +1,6 @@
 
 const MeetingUser = require("./models").MeetingUser;
-const Authorizer = require("../policies/meetingUser");
+const Authorizer = require("../policies/meetinguser");
 const Meeting = require("./models").Meeting;
 
 module.exports = {
